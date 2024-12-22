@@ -12,24 +12,14 @@ supabase = create_client(SQL_url, SQL_key)
 @app.route('/')
 def home():
     # Danh sách sản phẩm mẫu
-    products = [
-        {
-            "id": 1,
-            "name": "Giao diện HTML bán hàng",
-            "price": "500,000 VND",
-            "description": "Mẫu giao diện bán hàng chuyên nghiệp với HTML và CSS.",
-            "image": "source1.jpg",
-            "type": "HTML"
-        },
-        {
-            "id": 2,
-            "name": "Quản lý công việc với Python",
-            "price": "1,000,000 VND",
-            "description": "Ứng dụng quản lý công việc hoàn chỉnh với Flask.",
-            "image": "source2.jpg",
-            "type": "Python"
+    products_response = supabase.table("products").select("*").execute()
+    products_data = products_response.data or []
+    products = []
+    for product_data in products_data:
+        product = {
+            
         }
-    ]
+        products.append(product_data)
     return render_template('index.html', products=products)
 
 @app.route('/product/<int:id>')
@@ -51,13 +41,17 @@ def demo(id):
     return render_template('demo.html')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    data_user_response = supabase.table("user").select("*").execute()
+    data_user = data_user_response.data or []
+
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        print(f"Login attempt - Email: {email}, Password: {password}")
-        
-        return redirect(url_for('home'))
-    
+        for user in data_user:
+            if user['email'] == email and user['password'] == password:
+                return redirect(url_for('home'))
+
+        flash("password or email is incorrect.", "error")
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
