@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block title %}Home - Christmas Shop{% endblock %}
+{% block content %}
+<!-- Thông báo chào mừng -->
+<div
+  id="welcome-banner"
+  class="bg-yellow-400 text-red-700 text-center text-xl font-bold p-4 rounded-lg shadow-md animate-bounce"
+>
+  🎉 Welcome to the Christmas Shop! Enjoy our holiday specials! 🎄
+</div>
+
+<!-- Countdown Timer -->
+<h1
+  class="text-center text-4xl font-bold text-yellow-400 mt-8 mb-4 animate-pulse"
+>
+  🎄 Time until Christmas: 🎅
+</h1>
+<div
+  id="countdown"
+  class="text-center text-red-600 text-2xl font-bold mb-8"
+></div>
+
+<!-- Product List -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {% for product in products %}
+  <div
+    class="bg-white shadow-lg rounded-lg overflow-hidden border-4 border-green-600 relative"
+  >
+    <img
+      src="{{ product.img }}"
+      alt="{{ product.name }}"
+      class="w-full h-48 object-cover"
+    />
+    <div class="p-4">
+      <h2 class="text-xl font-bold text-red-600">🎁 {{ product.name }}</h2>
+      <p class="text-green-800 font-bold text-lg">{{ product.price }}</p>
+      <a href="#" class="text-blue-500 hover:underline mt-2 block"
+        >Xem chi tiết</a
+      >
+    </div>
+    <div
+      class="absolute top-0 right-0 bg-red-600 text-white py-1 px-2 rounded-bl-lg"
+    >
+      🔥 Best Seller
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Countdown Script -->
+<script>
+  const countdown = document.getElementById("countdown");
+  const targetDate = new Date("December 25, 2024 00:00:00").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor((distance % (1000 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % 1000) / 1000);
+    countdown.textContent = `${days} Days ${hours} Hrs ${minutes} Min ${seconds} Sec`;
+  }, 1000);
+
+  // Ẩn thông báo chào mừng sau 5 giây
+  setTimeout(() => {
+    document.getElementById("welcome-banner").style.display = "none";
+  }, 5000);
+</script>
+{% endblock %}

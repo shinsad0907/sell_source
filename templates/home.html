@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Home - Christmas Shop{% endblock %}
+{% block content %}
+<div id="home" class="section-content">
+  <!-- Notification Banner -->
+  <div class="top-notification" id="top-notification">
+    <div class="font-bold">🔔 THÔNG BÁO:</div>
+    <span class="notification-content">
+      Khuyến mãi giảm giá 15% cho người mới! Sử dụng mã: NEWBIE
+    </span>
+  </div>
+
+  <!-- Welcome Banner -->
+  <div
+    id="welcome-banner"
+    class="bg-gradient-to-r from-red-500 to-yellow-500 text-white text-center text-xl font-bold p-6 rounded-lg shadow-lg animate-bounce"
+  >
+    🎉 Welcome to the Christmas Shop! Enjoy our holiday specials! 🎄
+  </div>
+
+  <!-- Countdown Timer -->
+  <h1
+    class="text-center text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-green-600 mt-8 mb-4"
+  >
+    🎄 Time until Christmas: 🎅
+  </h1>
+  <div
+    id="countdown"
+    class="text-center text-3xl font-bold mb-8 countdown-text"
+  ></div>
+</div>
+{% endblock %}

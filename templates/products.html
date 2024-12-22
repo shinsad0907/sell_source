@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block title %}Products - Christmas Shop{% endblock
+%} {% block content %}
+<div id="products" class="section-content">
+  <h2 class="text-3xl font-bold text-red-600 mb-6">Sản Phẩm Nổi Bật</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for product in products %} {% include 'components/product-card.html' %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
